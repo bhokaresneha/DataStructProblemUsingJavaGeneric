@@ -60,13 +60,10 @@ class BinarySearchTree {
     {
         BinarySearchTree tree = new BinarySearchTree();
 
-        tree.insert(50);
+        tree.insert(56);
         tree.insert(30);
-        tree.insert(20);
-        tree.insert(40);
-        tree.insert(70);
-        tree.insert(60);
-        tree.insert(80);
+        tree.insert(76);
+
 
         // print inorder traversal of the BST
         System.out.println("The BST Created with input data(Left-root-right):");
