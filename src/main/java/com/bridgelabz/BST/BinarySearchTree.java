@@ -1,72 +1,159 @@
-package com.bridgelabz.BST;
-// Java program to demonstrate
-// insert operation in binary
-// search tree
-class BinarySearchTree {
+package com.bridgelabz.BST;//Program to implement BinarySearchTree.
+
+public class BinarySearchTree{
 
 
-    // Root of BST
-    Node root;
+    static Node root;   //root of the tree.
 
-    // Constructor
-    BinarySearchTree()
-    {
-    root = null;
+    public BinarySearchTree(){
+        root=null;
     }
 
-    // This method mainly calls insertRec()
-    void insert(int key) {
-        root = insertRec(root, key);
+    //function to find specific data elements in the tree.
+    public static Node find(int data){
+        Node temp=root;
+        Node prev=null;
+
+        while(temp!=null){
+            prev=temp;
+
+            if(temp.key==data){
+                return prev;
+            }
+            if(temp.key>data){
+                temp=temp.left;
+            }
+            else{
+                temp=temp.right;
+            }
+        }
+        return prev;
     }
 
-    /* A recursive function to
-    insert a new key in BST */
-    Node insertRec(Node root, int key)
-    {
-		/* If the tree is empty,
-		return a new node */
-        if (root == null) {
-            root = new Node(key);
-            return root;
+    //function to add elements in the tree.
+    public static void add(int data){
+        System.out.println("Inserting data : " + data);
+        Node node = new Node(data);
+        Node positionNode = find(data);
+        if(positionNode==null){
+            root=node;
+            return;
         }
 
-        /* Otherwise, recur down the tree */
-        if (key < root.key)
-            root.left = insertRec(root.left, key);
-        else if (key > root.key)
-            root.right = insertRec(root.right, key);
+        node.parent=positionNode;
 
-        /* return the (unchanged) node pointer */
-        return root;
-    }
-
-    // This method mainly calls InorderRec()
-    void inorder() { inorderRec(root); }
-
-    // A utility function to
-    // do inorder traversal of BST
-    void inorderRec(Node root)
-    {
-
-        if (root != null) {
-            inorderRec(root.left);
-            System.out.print(root.key+" ");
-            inorderRec(root.right);
+        if(node.key>positionNode.key){
+            positionNode.right=node;
+        }
+        else{
+            positionNode.left=node;
         }
     }
 
-    // Driver Code
-    public static void main(String[] args)
-    {
+
+
+
+    //function for InOrder Traversal of the tree.
+    private static void inorderTraversal(Node rootNode){
+        if(rootNode==null){
+            return;
+        }
+        inorderTraversal(rootNode.left);
+        System.out.print(rootNode.key + " ");
+        inorderTraversal(rootNode.right);
+    }
+
+    //function for PreOrder Traversal of the tree.
+    private static void preorderTraversal(Node rootNode){
+        if(rootNode==null){
+            return;
+        }
+        System.out.print(rootNode.key + " " );
+        preorderTraversal(rootNode.left);
+        preorderTraversal(rootNode.right);
+    }
+
+    //function for  PostOrder Traversal of the Tree.
+    private static void postorderTraversal(Node rootNode){
+        if(rootNode==null){
+            return;
+        }
+        postorderTraversal(rootNode.left);
+        postorderTraversal(rootNode.right);
+        System.out.print(rootNode.key + " ");
+    }
+
+    //function to display the tree.
+    public static void display(){
+        System.out.println();
+        System.out.println("Inorder Traversal");
+        inorderTraversal(root);
+
+        System.out.println();
+        System.out.println("PreOrder Traversal");
+        preorderTraversal(root);
+
+        System.out.println();
+        System.out.println("PostOrder Traversal");
+        postorderTraversal(root);
+
+        System.out.println();
+    }
+
+    //main function to run the program.
+    public static void main(String [] args){
         BinarySearchTree tree = new BinarySearchTree();
+        tree.add(56);
+        tree.add(30);
+        tree.add(70);
 
-        tree.insert(56);
-        tree.insert(30);
-        tree.insert(76);
+        tree.display();
 
 
-        // print inorder traversal of the BST
-        System.out.println("The BST Created with input data(Left-root-right):");
-        tree.inorder();
+
     }
 }
+
+		
+
+		
+		
+			
+			
+
+			
+			
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							
